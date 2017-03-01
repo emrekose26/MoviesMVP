@@ -2,6 +2,7 @@ package com.emrekose.moviesmvp.mvp.presenter.popular;
 
 import com.emrekose.moviesmvp.model.api.ApiSource;
 import com.emrekose.moviesmvp.mvp.view.popular.IPopularView;
+import com.emrekose.moviesmvp.util.Constants;
 
 import javax.inject.Inject;
 
@@ -28,7 +29,7 @@ public class PopularPresenter implements IPopularPresenter {
     public void loadPopularMovies() {
         view.showProgress();
 
-        apiSource.getPopularMovies("")
+        apiSource.getPopularMovies(Constants.API_KEY)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(popularResponse -> {
