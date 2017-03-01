@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.emrekose.moviesmvp"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+
+    // Dagger
+    compile rootProject.ext.dagger
+    annotationProcessor rootProject.ext.daggerCompiler
+
+    // Support lib
+    compile rootProject.ext.supportLibAppCompat
+    compile rootProject.ext.supportLibDesign
+    compile rootProject.ext.supportLibRecyclerView
+    compile rootProject.ext.supportLibCardView
+
+    // RxJava
+    compile rootProject.ext.rxjava
+    compile rootProject.ext.retrofitRxAdapter
+
+    // RxAndroid
+    compile rootProject.ext.rxAndroid
+
+    // Retrofit
+    compile rootProject.ext.retrofit
+    compile rootProject.ext.gsonConverter
+    compile rootProject.ext.retrofitLogging
+
+    // ButterKnife
+    compile rootProject.ext.butterKnife
+    annotationProcessor rootProject.ext.butterKnifeCompiler
+
+    // EventBus
+    compile rootProject.ext.eventBus
+
+    // UI
+    compile rootProject.ext.glide
+    compile rootProject.ext.timber
+}
