@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 
 import com.emrekose.moviesmvp.R;
 import com.emrekose.moviesmvp.ui.adapter.ViewPagerAdapter;
+import com.emrekose.moviesmvp.ui.fragment.PopularFragment;
+import com.emrekose.moviesmvp.ui.fragment.TopRatedFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -33,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        //adapter.addFragment(new PopularMoviesFragment(), getString(R.string.popular));
-        //adapter.addFragment(new TopRatedMoviesFragment(), getString(R.string.top_rated));
+        adapter.addFragment(new PopularFragment(), "Popular");
+        adapter.addFragment(new TopRatedFragment(), "Top Rated");
         viewPager.setAdapter(adapter);
     }
 }
