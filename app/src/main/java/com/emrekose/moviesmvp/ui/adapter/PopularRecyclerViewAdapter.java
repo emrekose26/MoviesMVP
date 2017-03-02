@@ -1,6 +1,7 @@
 package com.emrekose.moviesmvp.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +11,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.emrekose.moviesmvp.R;
+import com.emrekose.moviesmvp.event.PopularDetailEvent;
 import com.emrekose.moviesmvp.model.entity.popular.PopularResults;
+import com.emrekose.moviesmvp.ui.activity.MovieDetailActivity;
 import com.emrekose.moviesmvp.util.Constants;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,10 +33,13 @@ public class PopularRecyclerViewAdapter extends RecyclerView.Adapter<PopularRecy
 
     private List<PopularResults> resultsList;
     private Context context;
+    private EventBus eventBus;
 
-    public PopularRecyclerViewAdapter(List<PopularResults> resultsList, Context context) {
+    @Inject
+    public PopularRecyclerViewAdapter(List<PopularResults> resultsList, Context context, EventBus eventBus) {
         this.resultsList = resultsList;
         this.context = context;
+        this.eventBus = eventBus;
     }
 
     @Override
@@ -51,6 +61,11 @@ public class PopularRecyclerViewAdapter extends RecyclerView.Adapter<PopularRecy
                 .load(Constants.IMAGE_BASE_URL + Constants.IMAGE_W185 + results.getPoster_path())
                 .placeholder(R.drawable.movieicon)
                 .into(holder.poster);
+
+        holder.poster.setOnClickListener(v -> {
+            eventBus.postSticky(new PopularDetailEvent(results));
+            context.startActivity(new Intent(context, MovieDetailActivity.class));
+        });
 
     }
 
