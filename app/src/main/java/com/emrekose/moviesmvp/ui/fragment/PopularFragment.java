@@ -3,12 +3,12 @@ package com.emrekose.moviesmvp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.emrekose.moviesmvp.MoviesApp;
 import com.emrekose.moviesmvp.R;
@@ -36,7 +36,7 @@ import butterknife.ButterKnife;
 public class PopularFragment extends Fragment implements IPopularView {
 
     @BindView(R.id.popular_movies_recyclerView) RecyclerView recyclerView;
-    @BindView(R.id.popular_movies_swipeRefreshLayout) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.popularProgress) ProgressBar progressBar;
 
     @Inject PopularPresenter presenter;
     @Inject EventBus eventBus;
@@ -62,13 +62,13 @@ public class PopularFragment extends Fragment implements IPopularView {
 
     @Override
     public void showProgress() {
-        swipeRefreshLayout.setRefreshing(true);
+        progressBar.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
     }
 
     @Override
     public void hideProgress() {
-        swipeRefreshLayout.setRefreshing(false);
+        progressBar.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
     }
 
@@ -90,7 +90,6 @@ public class PopularFragment extends Fragment implements IPopularView {
         eventBus.unregister(this);
         super.onStop();
     }
-
 
     @Subscribe
     public void onPopularDetailEvent(PopularDetailEvent event) {}
