@@ -53,7 +53,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="50dp"
+                        android:layout_marginTop="60dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -101,8 +101,9 @@
 
             <ImageView
                 android:id="@+id/detail_backdrop"
-                android:layout_width="120dp"
-                android:layout_height="150dp"
+                android:layout_width="110dp"
+                android:layout_height="140dp"
+                android:scaleType="centerCrop"
                 android:layout_centerHorizontal="true"
                 tools:src="@drawable/movieicon" />
 

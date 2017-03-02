@@ -53,7 +53,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(Constants.IMAGE_BASE_URL + Constants.IMAGE_W342 + event.getResults().getPoster_path())
-                .fitCenter()
                 .placeholder(R.drawable.movieicon)
                 .into(detailBackdrop);
 
