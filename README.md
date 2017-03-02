@@ -9,8 +9,11 @@ Sample Android app built with an MVP approach uses [TheMovieDB API](https://www.
 - **Presenter** is a layer that provides View with data from Model. Presenter also handles background tasks.
 
 # ScreenShots
+#### Popular and Top Rated Movies
+<img src="https://raw.githubusercontent.com/emrekose26/MoviesMVP/master/screenshots/main.png" height="750"/>
 
-
+#### Movie Detail
+<img src="https://github.com/emrekose26/MoviesMVP/blob/master/screenshots/detail.png?raw=true" height="750"/>
 
 # Libraries Used
 
