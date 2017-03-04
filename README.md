@@ -1,4 +1,7 @@
 # MoviesMVP
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)]()
+[![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=102)](https://opensource.org/licenses/Apache-2.0)
+
 Sample Android app built with an MVP approach uses [TheMovieDB API](https://www.themoviedb.org/documentation/api) .
 
 # What is MVP?
