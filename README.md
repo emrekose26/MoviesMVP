@@ -26,7 +26,6 @@ Sample Android app built with an MVP approach uses [TheMovieDB API](https://www.
 - [GSON](https://github.com/google/gson)
 - [OkHttp](https://github.com/square/okhttp)
 - [ButterKnife](https://github.com/JakeWharton/butterknife)
-- [EventBus](https://github.com/greenrobot/EventBus)
 - [RetroLambda](https://github.com/evant/gradle-retrolambda)
 - [Glide](https://github.com/bumptech/glide)
 - [Timber](https://github.com/JakeWharton/timber)
