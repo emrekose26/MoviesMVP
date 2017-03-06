@@ -3,7 +3,7 @@ package com.emrekose.moviesmvp.di.app;
 import android.app.Application;
 import android.content.Context;
 
-import org.greenrobot.eventbus.EventBus;
+import com.emrekose.moviesmvp.util.RxBus;
 
 import javax.inject.Singleton;
 
@@ -36,7 +36,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    EventBus provideEventBus() {
-        return EventBus.getDefault();
+    RxBus provideRxBus(){
+        return RxBus.getInstance();
     }
 }

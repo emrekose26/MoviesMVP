@@ -1,8 +1,7 @@
 package com.emrekose.moviesmvp.di.app;
 
 import com.emrekose.moviesmvp.model.api.ApiSource;
-
-import org.greenrobot.eventbus.EventBus;
+import com.emrekose.moviesmvp.util.RxBus;
 
 import javax.inject.Singleton;
 
@@ -16,5 +15,5 @@ import dagger.Component;
 @Component(modules = {AppModule.class, NetworkModule.class})
 public interface AppComponent {
     ApiSource apiSource();
-    EventBus bus();
+    RxBus rxbus();
 }
