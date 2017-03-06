@@ -14,14 +14,11 @@ import com.emrekose.moviesmvp.MoviesApp;
 import com.emrekose.moviesmvp.R;
 import com.emrekose.moviesmvp.di.toprated.DaggerTopRatedComponent;
 import com.emrekose.moviesmvp.di.toprated.TopRatedModule;
-import com.emrekose.moviesmvp.event.TopRatedDetailEvent;
 import com.emrekose.moviesmvp.model.entity.toprated.TopRatedResults;
 import com.emrekose.moviesmvp.mvp.presenter.toprated.TopRatedPresenter;
 import com.emrekose.moviesmvp.mvp.view.toprated.ITopRatedView;
 import com.emrekose.moviesmvp.ui.adapter.TopRatedRecyclerViewAdapter;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.emrekose.moviesmvp.util.RxBus;
 
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class TopRatedFragment extends Fragment implements ITopRatedView {
     @BindView(R.id.toprated_movies_recyclerView) RecyclerView recyclerView;
 
     @Inject TopRatedPresenter presenter;
-    @Inject EventBus eventBus;
+    @Inject RxBus bus;
 
     TopRatedRecyclerViewAdapter adapter;
 
@@ -74,25 +71,11 @@ public class TopRatedFragment extends Fragment implements ITopRatedView {
 
     @Override
     public void showTopRatedMovies(List<TopRatedResults> topRatedResultsList) {
-        adapter = new TopRatedRecyclerViewAdapter(topRatedResultsList, getContext(),eventBus);
+        adapter = new TopRatedRecyclerViewAdapter(topRatedResultsList, getContext(),bus);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        eventBus.register(this);
-    }
-    @Override
-    public void onStop() {
-        eventBus.unregister(this);
-        super.onStop();
-    }
-
-    @Subscribe
-    public void onTopRatedDetailEvent(TopRatedDetailEvent event) {}
 
     private void initInjector() {
         DaggerTopRatedComponent.builder()

@@ -15,8 +15,7 @@ import com.emrekose.moviesmvp.event.PopularDetailEvent;
 import com.emrekose.moviesmvp.model.entity.popular.PopularResults;
 import com.emrekose.moviesmvp.ui.activity.MovieDetailActivity;
 import com.emrekose.moviesmvp.util.Constants;
-
-import org.greenrobot.eventbus.EventBus;
+import com.emrekose.moviesmvp.util.RxBus;
 
 import java.util.List;
 
@@ -33,13 +32,13 @@ public class PopularRecyclerViewAdapter extends RecyclerView.Adapter<PopularRecy
 
     private List<PopularResults> resultsList;
     private Context context;
-    private EventBus eventBus;
+    private RxBus bus;
 
     @Inject
-    public PopularRecyclerViewAdapter(List<PopularResults> resultsList, Context context, EventBus eventBus) {
+    public PopularRecyclerViewAdapter(List<PopularResults> resultsList, Context context, RxBus bus) {
         this.resultsList = resultsList;
         this.context = context;
-        this.eventBus = eventBus;
+        this.bus = bus;
     }
 
     @Override
@@ -63,7 +62,7 @@ public class PopularRecyclerViewAdapter extends RecyclerView.Adapter<PopularRecy
                 .into(holder.poster);
 
         holder.poster.setOnClickListener(v -> {
-            eventBus.postSticky(new PopularDetailEvent(results));
+            bus.postSticky(new PopularDetailEvent(results));
             context.startActivity(new Intent(context, MovieDetailActivity.class));
         });
 

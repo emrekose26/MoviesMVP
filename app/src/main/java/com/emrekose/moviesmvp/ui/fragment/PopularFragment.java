@@ -14,14 +14,11 @@ import com.emrekose.moviesmvp.MoviesApp;
 import com.emrekose.moviesmvp.R;
 import com.emrekose.moviesmvp.di.popular.DaggerPopularComponent;
 import com.emrekose.moviesmvp.di.popular.PopularModule;
-import com.emrekose.moviesmvp.event.PopularDetailEvent;
 import com.emrekose.moviesmvp.model.entity.popular.PopularResults;
 import com.emrekose.moviesmvp.mvp.presenter.popular.PopularPresenter;
 import com.emrekose.moviesmvp.mvp.view.popular.IPopularView;
 import com.emrekose.moviesmvp.ui.adapter.PopularRecyclerViewAdapter;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.emrekose.moviesmvp.util.RxBus;
 
 import java.util.List;
 
@@ -39,7 +36,7 @@ public class PopularFragment extends Fragment implements IPopularView {
     @BindView(R.id.popularProgress) ProgressBar progressBar;
 
     @Inject PopularPresenter presenter;
-    @Inject EventBus eventBus;
+    @Inject RxBus bus;
 
     PopularRecyclerViewAdapter adapter;
 
@@ -74,25 +71,11 @@ public class PopularFragment extends Fragment implements IPopularView {
 
     @Override
     public void showPopularMovies(List<PopularResults> popularResultsList) {
-        adapter = new PopularRecyclerViewAdapter(popularResultsList, getContext(),eventBus);
+        adapter = new PopularRecyclerViewAdapter(popularResultsList, getContext(),bus);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
     }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        eventBus.register(this);
-    }
-    @Override
-    public void onStop() {
-        eventBus.unregister(this);
-        super.onStop();
-    }
-
-    @Subscribe
-    public void onPopularDetailEvent(PopularDetailEvent event) {}
 
     private void initInjector() {
         DaggerPopularComponent.builder()

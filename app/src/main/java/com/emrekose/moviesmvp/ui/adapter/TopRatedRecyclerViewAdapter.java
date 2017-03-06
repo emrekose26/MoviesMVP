@@ -15,8 +15,7 @@ import com.emrekose.moviesmvp.event.TopRatedDetailEvent;
 import com.emrekose.moviesmvp.model.entity.toprated.TopRatedResults;
 import com.emrekose.moviesmvp.ui.activity.MovieDetailActivity;
 import com.emrekose.moviesmvp.util.Constants;
-
-import org.greenrobot.eventbus.EventBus;
+import com.emrekose.moviesmvp.util.RxBus;
 
 import java.util.List;
 
@@ -33,13 +32,13 @@ public class TopRatedRecyclerViewAdapter extends RecyclerView.Adapter<TopRatedRe
 
     private List<TopRatedResults> topRatedResultsList;
     private Context context;
-    private EventBus eventBus;
+    private RxBus bus;
 
     @Inject
-    public TopRatedRecyclerViewAdapter(List<TopRatedResults> topRatedResultsList, Context context, EventBus eventBus) {
+    public TopRatedRecyclerViewAdapter(List<TopRatedResults> topRatedResultsList, Context context, RxBus bus) {
         this.topRatedResultsList = topRatedResultsList;
         this.context = context;
-        this.eventBus = eventBus;
+        this.bus = bus;
     }
 
     @Override
@@ -63,7 +62,7 @@ public class TopRatedRecyclerViewAdapter extends RecyclerView.Adapter<TopRatedRe
                 .into(holder.poster);
 
         holder.poster.setOnClickListener(v -> {
-            eventBus.postSticky(new TopRatedDetailEvent(results));
+            bus.postSticky(new TopRatedDetailEvent(results));
             context.startActivity(new Intent(context, MovieDetailActivity.class));
         });
     }
