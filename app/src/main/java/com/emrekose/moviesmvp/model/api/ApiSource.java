@@ -15,9 +15,9 @@ public interface ApiSource {
 
     // Popular Movies
     @GET("movie/popular")
-    Observable<PopularResponse> getPopularMovies(@Query("api_key") String apiKey);
+    Observable<PopularResponse> getPopularMovies(@Query("api_key") String apiKey, @Query("language") String language);
 
     // Top rated Movies
     @GET("movie/top_rated")
-    Observable<TopRatedResponse> getTopRatedMovies(@Query("api_key") String apiKey);
+    Observable<TopRatedResponse> getTopRatedMovies(@Query("api_key") String apiKey, @Query("language") String language);
 }
