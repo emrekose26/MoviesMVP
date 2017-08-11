@@ -4,6 +4,8 @@ import com.emrekose.moviesmvp.model.api.ApiSource;
 import com.emrekose.moviesmvp.mvp.view.toprated.ITopRatedView;
 import com.emrekose.moviesmvp.util.Constants;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,7 +31,7 @@ public class TopRatedPresenter implements ITopRatedPresenter {
     public void loadTopRatedMovies() {
         view.showProgress();
 
-        apiSource.getTopRatedMovies(Constants.API_KEY)
+        apiSource.getTopRatedMovies(Constants.API_KEY, Locale.getDefault().getLanguage())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(topRatedResponse -> {

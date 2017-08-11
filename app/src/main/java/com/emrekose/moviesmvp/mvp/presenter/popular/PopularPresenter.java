@@ -4,6 +4,8 @@ import com.emrekose.moviesmvp.model.api.ApiSource;
 import com.emrekose.moviesmvp.mvp.view.popular.IPopularView;
 import com.emrekose.moviesmvp.util.Constants;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,7 +31,7 @@ public class PopularPresenter implements IPopularPresenter {
     public void loadPopularMovies() {
         view.showProgress();
 
-        apiSource.getPopularMovies(Constants.API_KEY)
+        apiSource.getPopularMovies(Constants.API_KEY, Locale.getDefault().getLanguage())
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(popularResponse -> {
